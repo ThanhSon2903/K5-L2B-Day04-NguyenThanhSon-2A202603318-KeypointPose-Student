@@ -1,0 +1,43 @@
+{
+ "mssv": "2A202603318",
+ "ten": "NguyenThanhSon",
+ "pool_version": "d04-k5-v2",
+ "cvat_user": "thanhnguyensonjqk@gmail.com",
+ "project": "d04-keypoint",
+ "persons": [
+  "000000150500.jpg",
+  "000000162046.jpg",
+  "000000194027.jpg",
+  "000000295358.jpg",
+  "000000493741.jpg",
+  "000000078170.jpg",
+  "000000156986.jpg",
+  "000000188804.jpg",
+  "000000023424.jpg",
+  "000000518966.jpg",
+  "000000100510.jpg",
+  "000000542160.jpg"
+ ],
+ "faces": [
+  "face_141135.jpg",
+  "face_147624.jpg",
+  "face_92028.jpg",
+  "face_436791.jpg",
+  "face_79591.jpg",
+  "face_514826.jpg",
+  "face_99874.jpg",
+  "face_560282.jpg"
+ ],
+ "tasks": {
+  "persons": {
+   "task_id": 8,
+   "job_id": 8,
+   "task_name": "persons-NguyenThanhSon"
+  },
+  "faces": {
+   "task_id": 9,
+   "job_id": 9,
+   "task_name": "faces-NguyenThanhSon"
+  }
+ }
+}
