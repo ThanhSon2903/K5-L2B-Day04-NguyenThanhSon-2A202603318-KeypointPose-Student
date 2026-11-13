@@ -36,18 +36,27 @@ Cách đổi cờ `occluded` / `outside` cho **một điểm** trên phiên bả
 
 | Nhóm ảnh | Số ảnh | Số skeleton đã gán | Số người dưới 60 px (không gán) | Số poster / gương / màn hình bỏ qua | Thời gian (phút) |
 |---|---:|---:|---:|---:|---:|
-| `easy` | 5 | | | | |
-| `occluded` | 3 | | | | |
-| `back` | 2 | | | | |
-| `small` | 1 | | | | |
-| `crowd` | 1 | | | | |
-| `faces` | 8 | | — | | |
+| `easy` | 5 | 9| 0 | 0|30 |
+| `occluded` | 4 |0 | 0| 0|70 |
+| `back` | 2 | 2|1|0 |40 |
+| `small` | 1 |0 |0 |0 |0 |
+| `crowd` | 1 |0 | 0|0 |0 |
+| `faces` | 8 |8 | 0 | 0| 30|
 
-- Số ảnh người đã xong ở mốc phút 105: ___ / 10
-- Thời gian thực tế (phút): CP1 ___ · CP2 ___ · CP3 ___
-- Ảnh tốn thời gian nhất là ảnh nào, vì sao?
+Kết quả tổng quan:
 
-...
+- Số ảnh người đã hoàn thành: 12/12 ảnh.
+
+- Tổng số skeleton người: 18.
+
+- Tổng số skeleton khuôn mặt: 8.
+
+- Tổng số annotation đã thực hiện: 26 skeleton.
+- Số ảnh người đã xong ở mốc phút 105: 7 / 10
+- Thời gian thực tế (phút): CP1 20 · CP2 30 · CP3 30
+- Ảnh tốn thời gian nhất là ảnh bên phía persons.zip và cụ thể là bức ảnh 3 người đánh bóng chày vì cần phải nhìn rõ hướng người đứng vì những người đó họ đứng chồng lên nhau nên rất khó xác định
+
+
 
 ## 3. Bảng ca khó (CP1, CP2)
 
@@ -55,11 +64,15 @@ Mỗi điểm bạn phân vân một dòng, nhất là phân vân giữa `v = 1`
 
 | Ảnh | Người / mặt | Điểm | Cờ đã chọn | Phân vân giữa | Lý do chọn |
 |---|---|---|---:|---|---|
-| | | | | | |
-| | | | | | |
-| | | | | | |
+|000000188804 |Người quay tư thế phức tạp |Ankle trái/phải |v = 2 |Đảo trái/phải hoặc tư thế chân bắt chéo Chân trái vắt ra phía sau chân phải nên vị trí hai mắt cá chân có thể trông ngược so với thông thường. Tôi kiểm tra lại tư thế và giữ nguyên nhãn. |Chân trái vắt ra phía sau chân phải nên vị trí hai mắt cá chân có thể trông ngược so với thông thường. Tôi kiểm tra lại tư thế và giữ nguyên nhãn.
+|000000542160 |Người trong tư thế bắt chéo |Knee, ankle |v = 2 | Đảo trái/phải hoặc tư thế chân bắt chéo |Các cặp đầu gối và mắt cá chân có vị trí khác thường. Sau khi kiểm tra lại, tôi nhận thấy tư thế chân có thể giải thích được vị trí này nên chưa thay đổi nhãn. |
+|Ảnh người bị che khuất |Người |Các khớp bị che |v=1 hoặc v=0 |Điểm bị che nhưng ước lượng được hoặc không xác định được vị trí |Tôi dựa vào khả năng xác định vị trí khớp từ tư thế cơ thể. Nếu vẫn xác định được vị trí thì chọn v=1, nếu không xác định được thì chọn v=0 theo guideline. |
 
 ## 4. Bảng tự review (CP3)
+
+- Quá trình review:
+
+Sau khi hoàn thành annotation, tôi kiểm tra lại các ảnh theo thứ tự từ ảnh cuối về ảnh đầu. Tôi tập trung vào các lỗi có thể xảy ra như đảo trái/phải, đặt keypoint sai vị trí, chọn sai visibility, thiếu hoặc thừa keypoint. Đặc biệt, tôi chú ý các ảnh người quay lưng và có tư thế tay chân bắt chéo.
 
 Đi từ ảnh cuối về ảnh đầu. 5 ảnh người (ít nhất 2 ảnh `back` hoặc `crowd`) và 3 ảnh mặt. Ít nhất 8 dòng, kể cả dòng `ok`. Ghi lỗi trước, sửa sau.
 
@@ -67,39 +80,29 @@ Mã lỗi dùng đúng một trong: `lr_swap`, `vis_flag`, `position`, `missing`
 
 | Ảnh | Người / mặt | Điểm | Mã lỗi | Ghi chú | Đã sửa? |
 |---|---|---|---|---|---|
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
+|000000188804 |Người |Ankle |lr_swap |Kiểm tra cặp mắt cá chân, ban đầu nghi ngờ nhầm trái/phải do tư thế chân bắt chéo. Sau khi xem lại ảnh, xác nhận vị trí phù hợp. |Không |
+|000000542160 |Người |Knee, ankle |lr_swap |Hai cặp khớp chân có vị trí bất thường, kiểm tra lại theo hướng cơ thể và giữ nguyên. |Không |
+
 
 Tổng hợp số lỗi theo mã:
 
 | `lr_swap` | `vis_flag` | `position` | `missing` | `extra` | `ok` |
 |---:|---:|---:|---:|---:|---:|
-| | | | | | |
+|2|0|0|0|0 | 0|
 
-Điểm còn phân vân giữa `v = 1` và `v = 0` (ghi cả hai lựa chọn và lý do chọn):
-
-...
+Điểm còn phân vân giữa `v = 1` và `v = 0` (ghi cả hai lựa chọn và lý do chọn): Không có điểm nào cả
 
 ## 5. Kiểm file xuất và kết quả tự kiểm (CP4)
 
 Tự kiểm tay trong file JSON:
 
 | File | Người / mặt kiểm (ảnh, thứ tự) | Số phần tử `keypoints` | Điểm `outside` ra `v = 0`, `occluded` ra `v = 1`? | `num_keypoints` khớp? |
-|---|---|---:|---|---|
-| `HoVaTen_persons.zip` | |51 giá trị mỗi annotation | Theo kết quả tự kiểm: có 83 điểm v = 0, cần đioois chiếu thủ công |Khớp |
-| `HoVaTen_faces.zip` | |39 giá trị mỗi annotation |Cần kiểm tra |Cần kiểm tra |
+|`NguyenThanhSon_persons.zip`|`000000023424` - annotation người thứ nhất|51 giá trị|Có 75 điểm v=0, cần kiểm tra thủ công cờ từng điểm|Khớp theo kết quả tự kiểm|
+| `NguyenThanhSon_faces.zip` |`face_141135` – annotation mặt thứ 1 |39 giá trị | Có 8 điểm v=0, cần kiểm tra thủ công cờ từng điểm|Khớp theo kết quả tự kiểm|
 
-Sau khi xuất, CVAT ghi `occluded` thành `v = ___` và `outside` thành `v = ___`. Tọa độ của điểm `outside` trong file là `0, 0` hay tọa độ cũ? ___
+Sau khi xuất, CVAT ghi `occluded` thành `v = 1` và `outside` thành `v = 0`. Có 83 diểm v = 0 vẫn giữ toạ độ cũ, thay vì chuyển về (0,0)
 
-Hai job đã chuyển sang completed trên CVAT? Có / Không
-
-Dán phần **TÓM TẮT** in ra từ `src/check_submission.py`:
+Hai job đã chuyển sang completed trên CVAT: Có
 
 [OK] src\exports\NguyenThanhSon_persons.zip
 [OK] src\exports\NguyenThanhSon_faces.zip
@@ -138,7 +141,9 @@ Kết quả: ĐẠT (đọc lại từng cảnh báo ở trên)
 Các `[CẢNH BÁO]` còn giữ nguyên và lý do:
 
 - [CẢNH BÁO] 000000188804.jpg #1: cặp ankle nằm ngược phía so với các cặp còn lại. Có thể đổi trái/phải một cặp (`lr_swap`), hoặc tay / chân bắt chéo thật: kiểm lại.
+=> Lý do: Chân trái vắt treo phía sau chân phải và đã kiểm tra lại và không phát hiện đặt nhầm key-point
 - [CẢNH BÁO] 000000542160.jpg #1: cặp knee, ankle nằm ngược phía so với các cặp còn lại. Có thể đổi trái/phải một cặp (`lr_swap`), hoặc tay / chân bắt chéo thật: kiểm lại.
+=>Vẫn giữ lại với lý do như bên trên
 
 ## 6. Ảnh chụp màn hình
 
