@@ -149,19 +149,19 @@ Các `[CẢNH BÁO]` còn giữ nguyên và lý do:
 
 1. Label `person` trong label constructor (đủ 17 điểm có tên):
 
-   ![Label person](images/1.png)
+   ![Label person](images/1_label_person.png)
 
 2. Một người quay lưng đã gán, cờ đã đặt:
 
-   ![Người quay lưng](images/2.png)
+   ![Người quay lưng](images/2_nguoi_quay_lung.png)
 
 3. Một khuôn mặt đã gán 13 điểm, phóng to vùng mắt:
 
-   ![Khuôn mặt phóng to](images/3.png)
+   ![Khuôn mặt phóng to](images/33_mat_phong_to.png)
 
 4. Một đoạn JSON xuất của một người:
 
-   ![JSON export](images/4.png)
+   ![JSON export](images/4_json_export.png)
 ## 7. Tự đánh giá
 
 1. Lỗi bạn mắc nhiều nhất hôm nay, và cách bạn sẽ tránh ở dự án thật:
